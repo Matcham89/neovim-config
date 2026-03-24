@@ -1,0 +1,18 @@
+tap "homebrew/cask-fonts"
+
+brew "neovim"
+brew "git"
+brew "fd"
+brew "fzf"
+brew "ripgrep"
+brew "lazygit"
+brew "tree-sitter-cli"
+brew "node"
+brew "python@3.13"
+brew "go"
+brew "php"
+brew "helm"
+brew "tflint"
+brew "terraform-docs"
+
+cask "font-jetbrains-mono-nerd-font"
