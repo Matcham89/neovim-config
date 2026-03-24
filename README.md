@@ -46,7 +46,7 @@ This repo assumes macOS and uses:
 If you want the repo to live directly at `~/.config/nvim`:
 
 ```bash
-git clone git@github.com:<you>/neovim-config.git ~/.config/nvim
+git clone https://github.com/Matcham89/neovim-config.git ~/.config/nvim
 cd ~/.config/nvim
 ./bootstrap-macos.sh
 ```
@@ -54,7 +54,7 @@ cd ~/.config/nvim
 If you want to keep the repo elsewhere and symlink it into place:
 
 ```bash
-git clone git@github.com:<you>/neovim-config.git ~/Documents/github/neovim-config
+git clone https://github.com/Matcham89/neovim-config.git ~/Documents/github/neovim-config
 cd ~/Documents/github/neovim-config
 ./bootstrap-macos.sh
 ```
@@ -90,7 +90,7 @@ Language and workflow tools used by this config:
 
 Optional UI nicety:
 
-- `font-jetbrains-mono-nerd-font`
+- install a Nerd Font manually if you want icon support
 
 ## What Neovim Installs Automatically
 

@@ -1,5 +1,3 @@
-tap "homebrew/cask-fonts"
-
 brew "neovim"
 brew "git"
 brew "fd"
@@ -14,5 +12,3 @@ brew "php"
 brew "helm"
 brew "tflint"
 brew "terraform-docs"
-
-cask "font-jetbrains-mono-nerd-font"
