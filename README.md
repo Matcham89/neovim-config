@@ -1,12 +1,12 @@
 # Neovim Config
 
-Portable macOS-focused [LazyVim](https://www.lazyvim.org/) config.
+Portable macOS-focused [LazyVim](https://www.lazyvim.org/) config plus a Homebrew-managed shell tooling baseline.
 
 This repo contains the current contents of `~/.config/nvim`, including:
 
 - your LazyVim config
 - `lazy-lock.json` so plugin versions stay consistent across laptops
-- a macOS `Brewfile` for the local prerequisites this setup expects
+- a macOS `Brewfile` for the local prerequisites and day-to-day CLI tools this setup expects
 - a `bootstrap-macos.sh` helper that installs packages and links the repo into `~/.config/nvim`
 
 ## Included LazyVim Extras
@@ -105,9 +105,14 @@ This repo assumes macOS and uses:
 
 ## Install
 
+These install commands replace any existing `~/.config/nvim`. If you want to keep the old config, move it somewhere else first.
+
 If you want the repo to live directly at `~/.config/nvim`:
 
 ```bash
+cd ~
+echo "Removing existing ~/.config/nvim"
+rm -rf ~/.config/nvim
 git clone https://github.com/Matcham89/neovim-config.git ~/.config/nvim
 cd ~/.config/nvim
 ./bootstrap-macos.sh
@@ -116,6 +121,9 @@ cd ~/.config/nvim
 If you want to keep the repo elsewhere and symlink it into place:
 
 ```bash
+cd ~
+echo "Removing existing ~/.config/nvim"
+rm -rf ~/.config/nvim
 git clone https://github.com/Matcham89/neovim-config.git ~/Documents/github/neovim-config
 cd ~/Documents/github/neovim-config
 ./bootstrap-macos.sh
@@ -124,11 +132,13 @@ cd ~/Documents/github/neovim-config
 The bootstrap script will:
 
 1. Verify macOS and Xcode Command Line Tools.
-2. Install Homebrew packages from `Brewfile`.
+2. Install Homebrew packages from `Brewfile` for both Neovim and the wider CLI toolchain.
 3. Link this repo to `~/.config/nvim` if needed.
 4. Run a headless `Lazy sync` so plugins install from the lockfile.
 
 ## What Homebrew Installs
+
+This repo now tracks both the editor prerequisites and the broader brew-installed CLI toolbox from this machine.
 
 Core editor requirements:
 
@@ -140,20 +150,43 @@ Core editor requirements:
 - `ripgrep`
 - `lazygit`
 - `tree-sitter-cli`
+
+Languages and runtimes:
+
 - `node`
 - `python@3.13`
 - `go`
 - `php`
 
-Language and workflow tools used by this config:
+Platform and infrastructure tooling:
 
+- `argocd`
+- `gh`
+- `glab`
+- `gcloud-cli`
 - `helm`
-- `tflint`
+- `jq`
+- `kubectl` via `kubernetes-cli`
 - `terraform-docs`
+- `tfenv`
+- `tflint`
+- `tilt`
+- `yq`
 
-Optional UI nicety:
+General shell and workstation utilities:
 
-- install a Nerd Font manually if you want icon support
+- `tmux`
+- `tree`
+- `font-jetbrains-mono-nerd-font`
+
+Additional direct installs currently captured from this Mac:
+
+- `cmatrix`
+- `dnsmasq`
+- `lolcat`
+- `mysql@8.4`
+- `tree-sitter@0.25`
+- `vim`
 
 ## What Neovim Installs Automatically
 
