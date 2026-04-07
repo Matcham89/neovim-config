@@ -1,18 +1,17 @@
 return {
   {
-    "tiesen243/vercel.nvim",
+    "navarasu/onedark.nvim",
     lazy = false,
     priority = 1000,
     opts = {
-      theme = "dark",
-      transparent = false,
+      style = "light",
     },
   },
 
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "vercel",
+      colorscheme = "onedark",
     },
   },
 }

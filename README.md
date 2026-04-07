@@ -16,12 +16,79 @@ This repo contains the current contents of `~/.config/nvim`, including:
 - git
 - go
 - helm
+- json
+- markdown
 - php
 - python
 - rego
 - terraform
 - toml
 - yaml
+
+Bash has no official LazyVim extra — `bash-language-server`, `shellcheck`, and `shfmt` are installed via Mason automatically.
+
+## Git Config
+
+This setup expects the following in `~/.gitconfig` (not tracked in this repo):
+
+```gitconfig
+[user]
+    name  = <your name>
+    email = <your email>
+
+[core]
+    editor    = nvim
+    autocrlf  = input
+    pager     = delta
+
+[init]
+    defaultBranch = main
+
+[pull]
+    rebase = true
+
+[push]
+    default         = current
+    autoSetupRemote = true
+
+[rebase]
+    autoStash = true
+
+[merge]
+    conflictstyle = diff3
+    tool          = nvimdiff
+
+[diff]
+    colorMoved = default
+    tool       = nvimdiff
+
+[credential]
+    helper = osxkeychain
+
+[alias]
+    lg      = log --oneline --graph --decorate --all
+    st      = status -sb
+    co      = checkout
+    br      = branch
+    unstage = reset HEAD --
+    last    = log -1 HEAD
+    aliases = config --get-regexp alias
+
+[url "git@github.com:"]
+    insteadOf = https://github.com/
+
+[url "git@gitlab.com:"]
+    insteadOf = https://gitlab.com/
+```
+
+`delta` must be installed first — it is included in the `Brewfile`.
+
+For GitHub/GitLab integrations in Neovim (Octo), authenticate via:
+
+```bash
+gh auth login          # GitHub
+GITLAB_TOKEN=<token>   # GitLab — add to your shell profile
+```
 
 ## macOS Requirements
 
@@ -72,6 +139,7 @@ Core editor requirements:
 
 - `neovim`
 - `git`
+- `git-delta` — enhanced diff pager used by the git config
 - `fd`
 - `fzf`
 - `ripgrep`
@@ -97,16 +165,29 @@ Optional UI nicety:
 On first launch, LazyVim and Mason will install the plugin and language-tooling set driven by this config, including the current servers and formatters for:
 
 - ansible
+- bash (`bash-language-server`, `shellcheck`, `shfmt`)
 - docker
 - go
 - helm
+- json
 - lua
+- markdown
 - php
 - python
 - rego
 - terraform
 - toml
 - yaml
+
+### Git plugins (Neovim)
+
+| Plugin | Keymaps | Purpose |
+|---|---|---|
+| `diffview.nvim` | `<leader>gd` diff view, `<leader>gh` file history | Full-screen diff and merge tool |
+| `neogit` | `<leader>gn` | Magit-style Git UI |
+| `octo.nvim` | `<leader>go` prompt, `<leader>gpr` PRs, `<leader>gpi` issues | GitHub PRs and issues in Neovim |
+
+LazyVim also bundles `gitsigns.nvim` and `lazygit` integration out of the box.
 
 ## Notes
 
