@@ -74,11 +74,6 @@ This setup expects the following in `~/.gitconfig` (not tracked in this repo):
     last    = log -1 HEAD
     aliases = config --get-regexp alias
 
-[url "git@github.com:"]
-    insteadOf = https://github.com/
-
-[url "git@gitlab.com:"]
-    insteadOf = https://gitlab.com/
 ```
 
 `delta` must be installed first — it is included in the `Brewfile`.
