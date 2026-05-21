@@ -26,6 +26,26 @@ target_dir="$config_home/nvim"
 echo "Installing Homebrew packages from Brewfile..."
 brew bundle --file="$repo_root/Brewfile"
 
+if ! command -v tflint &>/dev/null; then
+  echo "Installing tflint from GitHub releases..."
+  arch=$(uname -m); [[ "$arch" == "arm64" ]] && arch="arm64" || arch="amd64"
+  latest=$(curl -fsSL https://api.github.com/repos/terraform-linters/tflint/releases/latest | jq -r .tag_name)
+  curl -fsSL "https://github.com/terraform-linters/tflint/releases/download/${latest}/tflint_darwin_${arch}.zip" -o /tmp/tflint.zip
+  unzip -oq /tmp/tflint.zip -d /tmp tflint
+  install -m 0755 /tmp/tflint /usr/local/bin/tflint
+  rm /tmp/tflint.zip /tmp/tflint
+  echo "tflint ${latest} installed."
+else
+  echo "tflint already installed, skipping."
+fi
+
+if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
+  echo "Installing oh-my-zsh..."
+  RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+else
+  echo "oh-my-zsh already installed, skipping."
+fi
+
 mkdir -p "$config_home"
 
 if [[ "$repo_root" != "$target_dir" ]]; then
