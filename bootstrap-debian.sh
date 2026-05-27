@@ -36,9 +36,6 @@ sudo apt-get install -y \
   curl \
   wget \
   gnupg \
-  lsb-release \
-  software-properties-common \
-  apt-transport-https \
   unzip \
   zip \
   git \
