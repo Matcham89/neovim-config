@@ -1,6 +1,6 @@
 # Neovim Config
 
-Portable macOS-focused [LazyVim](https://www.lazyvim.org/) config plus a Homebrew-managed shell tooling baseline.
+Portable [LazyVim](https://www.lazyvim.org/) config plus a managed shell tooling baseline for macOS and Debian/Ubuntu.
 
 This repo contains the current contents of `~/.config/nvim`, including:
 
@@ -8,6 +8,7 @@ This repo contains the current contents of `~/.config/nvim`, including:
 - `lazy-lock.json` so plugin versions stay consistent across laptops
 - a macOS `Brewfile` for the local prerequisites and day-to-day CLI tools this setup expects
 - a `bootstrap-macos.sh` helper that installs packages and links the repo into `~/.config/nvim`
+- a `bootstrap-debian.sh` helper that installs the same toolchain on Debian/Ubuntu via `apt` and upstream releases
 
 ## Included LazyVim Extras
 
@@ -84,6 +85,42 @@ For GitHub/GitLab integrations in Neovim (Octo), authenticate via:
 gh auth login          # GitHub
 GITLAB_TOKEN=<token>   # GitLab — add to your shell profile
 ```
+
+## Debian / Ubuntu Install
+
+Mirror of the macOS flow using `apt` and upstream release binaries:
+
+```bash
+cd ~
+echo "Removing existing ~/.config/nvim"
+rm -rf ~/.config/nvim
+git clone https://github.com/Matcham89/neovim-config.git ~/.config/nvim
+cd ~/.config/nvim
+./bootstrap-debian.sh
+```
+
+Or keep the repo elsewhere and symlink:
+
+```bash
+git clone https://github.com/Matcham89/neovim-config.git ~/Documents/github/neovim-config
+cd ~/Documents/github/neovim-config
+./bootstrap-debian.sh
+```
+
+The Debian bootstrap will:
+
+1. Verify the host is Debian/Ubuntu (apt) and not running as root.
+2. Install base packages from `apt` (`git`, `fzf`, `ripgrep`, `fd-find`, `jq`, `tmux`, `tree`, `vim`, `cmatrix`, `lolcat`, `dnsmasq`, `php`, `python3*`, `zsh`, build toolchain, etc.).
+3. Install upstream binaries that `apt` either lacks or ships too old: latest Neovim, `git-delta`, `lazygit`, `tree-sitter-cli` (via npm), Go, `gh`, `glab`, `kubectl`, `helm`, `argocd`, `yq`, `terraform-docs`, `tfenv`, `tflint`, `tilt`, `gcloud`, MySQL 8.x, and JetBrainsMono Nerd Font.
+4. Install `oh-my-zsh` if missing.
+5. Link this repo into `~/.config/nvim` and run a headless `Lazy sync`.
+
+Notes for Debian:
+
+- `fd` is named `fdfind` on Debian; the script adds an `fd` symlink in `~/.local/bin`. Ensure `~/.local/bin` is on `PATH`.
+- Debian's `python3` is the system Python (typically 3.11 on bookworm, 3.13 on trixie) rather than the macOS `python@3.13` keg. Use `pyenv` if you need a pinned version.
+- `tfenv` is cloned to `~/.tfenv`; pick a Terraform with `tfenv install latest && tfenv use latest`.
+- To make zsh the default shell: `chsh -s "$(which zsh)"`.
 
 ## macOS Requirements
 
